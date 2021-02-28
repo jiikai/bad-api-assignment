@@ -585,6 +585,7 @@ ifNoneMatchReq : Flags -> Maybe ETag -> String -> Http.Expect Msg -> Cmd Msg
 ifNoneMatchReq { protocol, rootUrl } etag urlString expectFunction =
   let
     ifNoneMatch = etagIfNoneMatch (Maybe.withDefault etagEmpty etag)
+    -- we use a dirty proxy hack to get around the remote API'S lack of CORS headers
     corsProxy = "https://afternoon-mountain-60459.herokuapp.com/"
   in
     Http.request
