@@ -19,7 +19,6 @@ import Tuple2 as Tuple
 import Url
 import Url.Builder as Builder
 
-import Debug exposing (log)
 
 import SolidColor
 import Palette.X11 exposing (..)
@@ -30,7 +29,6 @@ import Product.Category as Category exposing (Category)
 import Product.ColorSpec as ColorSpec exposing (ColorSpec)
 import Product.Listing as Listing exposing (Listing)
 import Availability exposing (Availability)
-import Test.Product exposing (hardcodedJsonData)
 
 
 
