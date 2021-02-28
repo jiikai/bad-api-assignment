@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+  </head>
+
+  <body>
+    <div id="elm-app"></div>
+    <script type="application/javascript" src="elm.js"></script>
+    <script type="application/javascript">
+    var flags = JSON.parse({
+          protocol: 'http://',
+          rootUrl: 'localhost:3000',
+          availabilityUrl: '/v2/availability',
+          productsUrl: '/v2/products'
+    })
+    var app = Elm.Main.init({
+        node: document.getElementById('elm-app'),
+        flags: flags
+    });
+    </script>
+  </body>
+</html>
