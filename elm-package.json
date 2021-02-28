@@ -4,7 +4,7 @@
     ],
     "version": "0.1",
     "license": "MIT"
-    "description": "Bad API Assignment",
+    "summary": "Bad API Assignment",
     "elm-version": "0.19.1",
     "dependencies": {
         "direct": {
