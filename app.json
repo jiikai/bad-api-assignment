@@ -2,7 +2,7 @@
     "name": "Bad Api Assignment",
     "repository": "https://github.com/jiikai/bad-api-assignment",
     "env": {
-        "ELM_COMPILE": "elm make src/Main.elm --output elm.js"
+        "ELM_COMPILE": "elm make Main.elm --output elm.js"
     },
     "buildpacks": [
         {
