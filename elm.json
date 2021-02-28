@@ -1,9 +1,10 @@
 {
+    "type": "application",
     "source-directories": [
         "."
     ],
     "version": "0.1",
-    "license": "MIT"
+    "license": "MIT",
     "summary": "Bad API Assignment",
     "elm-version": "0.19.1",
     "dependencies": {

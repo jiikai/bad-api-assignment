@@ -221,8 +221,8 @@ init encodedFlags url key =
   let
     flags = Decode.decodeValue flagsDecoder encodedFlags
       |> Result.toMaybe |> Maybe.withDefault 
-        { protocol = "http://"
-        , rootUrl = "localhost:3000/v2/"
+        { protocol = "https://"
+        , rootUrl = "bad-api-assignment.reaktor.com/v2/"
         , availabilityUrl = "availability/"
         , productsUrl = "products/"
         }
@@ -585,11 +585,12 @@ ifNoneMatchReq : Flags -> Maybe ETag -> String -> Http.Expect Msg -> Cmd Msg
 ifNoneMatchReq { protocol, rootUrl } etag urlString expectFunction =
   let
     ifNoneMatch = etagIfNoneMatch (Maybe.withDefault etagEmpty etag)
+    corsProxy = "https://afternoon-mountain-60459.herokuapp.com/"
   in
     Http.request
       { method = "GET"
       , headers = [ ifNoneMatch ]
-      , url = protocol ++ rootUrl ++ urlString
+      , url = corsProxy ++ protocol ++ rootUrl ++ urlString
       , body = Http.emptyBody
       , expect = expectFunction
       , timeout = Nothing

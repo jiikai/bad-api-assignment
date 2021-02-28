@@ -1,17 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Main</title>
-  <style>body { padding: 0; margin: 0; }</style>
-</head>
-
-<body>
-
-<pre id="elm"></pre>
-
-<script>
-try {
 (function(scope){
 'use strict';
 
@@ -7753,7 +7739,6 @@ var $author$project$Main$ifNoneMatchReq = F4(
 		var rootUrl = _v0.rootUrl;
 		var ifNoneMatch = $author$project$Main$etagIfNoneMatch(
 			A2($elm$core$Maybe$withDefault, $author$project$Main$etagEmpty, etag));
-		var corsProxy = 'https://afternoon-mountain-60459.herokuapp.com/';
 		return $elm$http$Http$request(
 			{
 				body: $elm$http$Http$emptyBody,
@@ -7764,10 +7749,8 @@ var $author$project$Main$ifNoneMatchReq = F4(
 				timeout: $elm$core$Maybe$Nothing,
 				tracker: $elm$core$Maybe$Nothing,
 				url: _Utils_ap(
-					corsProxy,
-					_Utils_ap(
-						protocol,
-						_Utils_ap(rootUrl, urlString)))
+					protocol,
+					_Utils_ap(rootUrl, urlString))
 			});
 	});
 var $the_sett$elm_refine$Enum$toString = F2(
@@ -8194,7 +8177,7 @@ var $author$project$Main$init = F3(
 	function (encodedFlags, url, key) {
 		var flags = A2(
 			$elm$core$Maybe$withDefault,
-			{availabilityUrl: 'availability/', productsUrl: 'products/', protocol: 'https://', rootUrl: 'bad-api-assignment.reaktor.com/v2/'},
+			{availabilityUrl: 'availability/', productsUrl: 'products/', protocol: 'http://', rootUrl: 'localhost:3000/v2/'},
 			$elm$core$Result$toMaybe(
 				A2($elm$json$Json$Decode$decodeValue, $author$project$Main$flagsDecoder, encodedFlags)));
 		return _Utils_Tuple2(
@@ -10099,21 +10082,3 @@ var $author$project$Main$view = function (model) {
 var $author$project$Main$main = $elm$browser$Browser$application(
 	{init: $author$project$Main$init, onUrlChange: $author$project$Main$UrlChanged, onUrlRequest: $author$project$Main$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main($elm$json$Json$Decode$value)(0)}});}(this));
-
-  var app = Elm.Main.init({ node: document.getElementById("elm") });
-}
-catch (e)
-{
-  // display initialization errors (e.g. bad flags, infinite recursion)
-  var header = document.createElement("h1");
-  header.style.fontFamily = "monospace";
-  header.innerText = "Initialization Error";
-  var pre = document.getElementById("elm");
-  document.body.insertBefore(header, pre);
-  pre.innerText = e;
-  throw e;
-}
-</script>
-
-</body>
-</html>
