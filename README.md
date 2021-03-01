@@ -20,11 +20,14 @@ Serve it with for example [http-server](https://www.npmjs.com/package/http-serve
 Ran in the app directory, this will serve `index.html` on `localhost:8080` by default.
 
 The test folder includes a script for 
+
   1. fetching the JSON resources from the remote APIs and concatenating these to one huge `mockdb.json`;
   2. serving them with [json-server](https://github.com/typicode/json-server) at `localhost:3030`.
 
-To fetch:
-  ./mockdb_server.sh https://bad-api-assignment.reaktor.com/v2 beanies,facemasks,gloves
+To fetch: 
+
+    ./mockdb_server.sh https://bad-api-assignment.reaktor.com/v2 beanies,facemasks,gloves
   
-To start server (assuming `mockdb.json` exists`):
-  ./mockdb.json
+To start server (assuming `mockdb.json` exists): 
+
+    mockdb.json
