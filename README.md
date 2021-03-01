@@ -22,7 +22,7 @@ Ran in the app directory, this will serve `index.html` on `localhost:8080` by de
 The test folder includes a script for 
 
   1. fetching the JSON resources from the remote APIs and concatenating these to one huge `mockdb.json`;
-  2. serving them with [json-server](https://github.com/typicode/json-server) at `localhost:3030`.
+  2. serving them with [json-server](https://github.com/typicode/json-server) at `localhost:3000`.
 
 To fetch: 
 
