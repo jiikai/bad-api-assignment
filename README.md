@@ -4,7 +4,7 @@ Elm app for Reaktor's summer job 2021 assignment.
 
 Running at [Forge](https://bad-api-assignment.getforge.io/).
 
-Deploy locally (requires the Elm compiler, see [here](https://guide.elm-lang.org/install/elm.html) for instructions:
+Deploy locally (requires the Elm compiler, see [here](https://guide.elm-lang.org/install/elm.html) for instructions):
 
     git clone https://github.com/jiikai/bad-api-assignment.git
     cd bad-api-assignment
