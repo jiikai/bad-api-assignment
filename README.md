@@ -30,4 +30,4 @@ To fetch:
   
 To start server (assuming `mockdb.json` exists): 
 
-    mockdb.json
+    ./mockdb.json
