@@ -128,6 +128,7 @@ type alias Flags =
   , rootUrl : String
   , availabilityUrl : String
   , productsUrl : String
+  , corsProxy : String
   }
 
 type alias Model =
@@ -225,6 +226,7 @@ init encodedFlags url key =
         , rootUrl = "bad-api-assignment.reaktor.com/v2/"
         , availabilityUrl = "availability/"
         , productsUrl = "products/"
+        , corsProxy = "https://afternoon-mountain-60459.herokuapp.com/"
         }
   in
     ( (Model (NavState key url (Route.fromUrl url)) initStore Dict.empty flags)
@@ -464,7 +466,6 @@ view model =
             , viewLink "/products/gloves" "Gloves"
             ]
         , (viewContent)
-        --, text (Debug.toString model.stock)
         ]
     }
 
@@ -489,12 +490,16 @@ viewProducts stock products =
   List.map (\listing ->
     let
       manufacturer = Listing.description listing |> .manufacturer
-      viewData = getStockSection manufacturer stock
-        |> Maybe.map Tuple.second
-        |> Maybe.map (Availability.get (Listing.idValue listing))
-        |> Maybe.withDefault Availability.Unknown
-        |> Availability.toBoolAndString
-        |> Tuple.uncurry ListingViewData
+      ( loadState, sect ) = getStockSection manufacturer stock
+        |> Maybe.withDefault ( Initializing, Availability.empty )
+      viewData =
+        case loadState of
+          Initializing ->
+            { visibility = False, stock = "Loading stock..." }
+          _ ->
+            Availability.get (Listing.idValue listing) sect
+            |> Availability.toBoolAndString
+            |> Tuple.uncurry ListingViewData
     in
       Listing.viewKeyed ( listing, viewData )) products |> Keyed.ul [ ]
 
@@ -582,15 +587,14 @@ expectStockJson manufacturer toMsg =
 
 
 ifNoneMatchReq : Flags -> Maybe ETag -> String -> Http.Expect Msg -> Cmd Msg
-ifNoneMatchReq { protocol, rootUrl } etag urlString expectFunction =
+ifNoneMatchReq { protocol, rootUrl, corsProxy } etag urlString expectFunction =
   let
     ifNoneMatch = etagIfNoneMatch (Maybe.withDefault etagEmpty etag)
-    -- we use a dirty proxy hack to get around the remote API'S lack of CORS headers
-    corsProxy = "https://afternoon-mountain-60459.herokuapp.com/"
   in
     Http.request
       { method = "GET"
       , headers = [ ifNoneMatch ]
+-- we use a dirty proxy hack to get around the remote API'S lack of CORS headers
       , url = corsProxy ++ protocol ++ rootUrl ++ urlString
       , body = Http.emptyBody
       , expect = expectFunction
@@ -642,8 +646,9 @@ httpErrorToString err =
 
 flagsDecoder : Decoder Flags
 flagsDecoder =
-  Decode.map4 Flags
+  Decode.map5 Flags
     (Decode.field "protocol" Decode.string)
     (Decode.field "rootUrl" Decode.string)
     (Decode.field "productsUrl" Decode.string)
     (Decode.field "availabilityUrl" Decode.string)
+    (Decode.field "corsProxy" Decode.string)
